@@ -15,15 +15,6 @@ Supported Browsers
 - IE 7/8
 
 
-(old)
-Currently Broken (but hopefully not for long)  
----------------------------------------------
-- IE 7/8
-
-(widespread mobile support [android, blackberry, windows] uncertain)
-(/old)
-
-
 License
 --------
 

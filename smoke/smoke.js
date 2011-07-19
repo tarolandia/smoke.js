@@ -1,4 +1,6 @@
-var smoketimeout = [];
+var smoketimeout = [],
+    smoke_zindex = 100;
+
 var smoke = {
 
   newdialog: function( ){
@@ -6,10 +8,12 @@ var smoke = {
     this.bodyload( randId );
     return randId;
   },
+
 	bodyload: function( id ){
 			var ff = document.createElement('div');
 					ff.setAttribute('id', 'smoke-out-' + id );
-					ff.setAttribute('class','smoke-base');
+					ff.style.zIndex = smoke_zindex;
+					smoke_zindex++;
 					document.body.appendChild(ff);
 	},
 	
@@ -21,7 +25,30 @@ var smoke = {
   
   },
 
-	build: function(e,f, randId){
+  listen: function(evnt, elem, func) {
+      if (elem.addEventListener)  // W3C DOM
+        elem.addEventListener(evnt, func, false);
+      else if (elem.attachEvent) { // IE DOM
+        var r = elem.attachEvent("on"+evnt, func);
+        return r;
+      } else {
+        return false;
+      }
+  },
+
+  removeEvent: function(evnt, elem, func) {
+      if (elem.removeEventListener)  // W3C DOM
+        elem.removeEventListener(evnt, func, false);
+      else if (elem.detachEvent) { // IE DOM
+        var r = elem.detachEvent("on"+evnt, func);
+        return r;
+      } else {
+        return false;
+      }
+  },
+  
+  
+  build: function(e,f, randId){
 		e = e.replace(/\n/g,'<br />');
 		e = e.replace(/\r/g,'<br />');
 		var prompt = '';
@@ -73,7 +100,7 @@ var smoke = {
 		
 		// close on background click
 		var g = document.getElementById('smoke-bg-' + randId);
-				g.addEventListener("click",function(){
+				this.listen("click", g, function(){
 					smoke.destroy(f.type, randId);
 					if (f.type == 'prompt' || f.type == 'confirm'){
 						f.callback(false);
@@ -89,7 +116,7 @@ var smoke = {
 		if (f.type == 'alert'){
 			// return true
 			var h = document.getElementById('alert-ok-' + randId);
-					h.addEventListener("click",function(){
+					this.listen("click", h, function(){
 						smoke.destroy(f.type, randId);
 					}, false);
 
@@ -104,7 +131,7 @@ var smoke = {
 		if (f.type == 'confirm'){
 			// return false
 			var h = document.getElementById('confirm-cancel-' + randId);
-					h.addEventListener("click",function(){
+					this.listen("click", h, function(){
 								smoke.destroy(f.type, randId);
 								f.callback(false);
 					}, false);
@@ -112,7 +139,7 @@ var smoke = {
 			
 			// return true
 			var i = document.getElementById('confirm-ok-' + randId);
-					i.addEventListener("click",function(){
+					this.listen("click", i, function(){
 								smoke.destroy(f.type, randId);
 								f.callback(true);
 					}, false);
@@ -138,7 +165,7 @@ var smoke = {
 
 			// return false
 			var h = document.getElementById('prompt-cancel-' + randId);
-					h.addEventListener("click",function(){
+					this.listen("click", h,function(){
 								smoke.destroy(f.type, randId);
 								f.callback(false);
 					}, false);
@@ -146,7 +173,7 @@ var smoke = {
 			// return	contents of input box
 			var j = document.getElementById('dialog-input-' + randId);
 			var i = document.getElementById('prompt-ok-' + randId);
-					i.addEventListener("click",function(){
+					this.listen("click", i, function(){
 								smoke.destroy(f.type, randId);
 								f.callback(j.value);
 					}, false);
@@ -173,12 +200,12 @@ var smoke = {
 	
 	destroy: function(type, id, remove){				
 		var box = document.getElementById('smoke-out-' + id);
-				box.setAttribute('class','smoke-base');
+				box.className = 'smoke-base';
 
 			
 			// confirm/alert/prompt remove click listener
 			if (g = document.getElementById(type+'-ok-' + id)){
-				g.removeEventListener("click", function(){}, false);
+				this.removeEvent("click", g, function(){});
 				
 				// remove keyup listener
 				document.onkeyup = null;
@@ -187,7 +214,7 @@ var smoke = {
 			// confirm/prompt remove click listener
 			if (h = document.getElementById(type+'-cancel-' + id)){
 
-				h.removeEventListener("click", function(){}, false);
+				this.removeEvent("click",h, function(){});
 			}
 			if( remove !== undefined )
   			document.body.removeChild( box );

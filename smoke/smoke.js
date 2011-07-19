@@ -5,6 +5,7 @@ var smoke = {
 
   newdialog: function( ){
 		var randId = new Date().getTime();
+		randId = Math.random(1,999) + randId; 
     this.bodyload( randId );
     return randId;
   },
@@ -16,13 +17,7 @@ var smoke = {
 					smoke_zindex++;
 					document.body.appendChild(ff);
 	},
-	
-	forceload: function(){
-  	smoke.bodyload();
-	},
-
   dummy: function(){
-  
   },
 
   listen: function(evnt, elem, func) {
@@ -89,9 +84,12 @@ var smoke = {
 
 	
 		var ff = document.getElementById('smoke-out-' + randId );
-				ff.innerHTML = box;
-				ff.className = 'smoke-base smoke-visible';
+    		ff.className = 'smoke-base smoke-visible';
+		    ff.innerHTML = box;
     
+    while( ff.innerHTML == "") {
+		    ff.innerHTML = box;
+    }
     
 		// clear the timeout if it's already been activated
 		if (smoketimeout[randId]){
@@ -106,9 +104,6 @@ var smoke = {
 						f.callback(false);
 					}
 				}, false);
-
-
-
 
 
 		// listeners for button actions
@@ -195,6 +190,7 @@ var smoke = {
 				smoke.destroy(f.type, randId);
 			},f.timeout);
 		}
+		
 		
 	},
 	

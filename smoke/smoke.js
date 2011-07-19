@@ -5,6 +5,7 @@ var smoke = {
 
   newdialog: function( ){
 		var randId = new Date().getTime();
+		randId = Math.random(1,999) + randId; 
     this.bodyload( randId );
     return randId;
   },
@@ -16,13 +17,7 @@ var smoke = {
 					smoke_zindex++;
 					document.body.appendChild(ff);
 	},
-	
-	forceload: function(){
-  	smoke.bodyload();
-	},
-
   dummy: function(){
-  
   },
 
   listen: function(evnt, elem, func) {
@@ -89,9 +84,12 @@ var smoke = {
 
 	
 		var ff = document.getElementById('smoke-out-' + randId );
-				ff.innerHTML = box;
-				ff.className = 'smoke-base smoke-visible';
+    		ff.className = 'smoke-base smoke-visible';
+		    ff.innerHTML = box;
     
+    while( ff.innerHTML == "") {
+		    ff.innerHTML = box;
+    }
     
 		// clear the timeout if it's already been activated
 		if (smoketimeout[randId]){
@@ -193,6 +191,7 @@ var smoke = {
 			},f.timeout);
 		}
 		
+		
 	},
 	
 	destroy: function(type, id, remove){				
@@ -221,7 +220,7 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
   	    smoke.build(e,{type:'alert'},id);
-  	  }, 7); 
+  	  }, 50); 
 	},
 	
 	signal: function(e,f){
@@ -231,14 +230,14 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    smoke.build(e,{type:'signal',timeout:f}, id);
-  	  }, 7); 
+  	  }, 50); 
 	},
 	
 	confirm: function(e,f){
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    smoke.build(e,{type:'confirm',callback:f}, id);
-  	  }, 7); 
+  	  }, 50); 
 		
 	},
 	
@@ -246,7 +245,7 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    return smoke.build(e,{type:'prompt',callback:f}, id);
-  	  }, 7); 
+  	  }, 50); 
 	}
 	
 };

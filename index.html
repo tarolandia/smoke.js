@@ -79,9 +79,9 @@
 		
 		<pre>smoke.confirm('this is still cool, yeah?',function(e){
 	if (e){
-		alert('OK pressed');
+		smoke.alert('OK pressed'); //you can use smoke alert here
 	}else{
-		alert('CANCEL pressed');
+		smoke.alert('CANCEL pressed');
 	}
 });</pre>
 
@@ -89,27 +89,14 @@
 
 		<pre>smoke.prompt('what\'s my name?',function(e){
 	if (e){
-		alert('my name is '+e);
+		smoke.alert('my name is '+e);
 	}else{
-		alert('no');
+		smoke.alert('no');
 	}
 });</pre>
 
 		
-		<p>Sometimes you just need to show something when the page loads. The necessary markup for this component, however, is injected into the DOM when it loads, so it's ready to execute on DOM ready. If you want to show an alert as soon as the DOM is ready, you can force smoke to render and show messages to your heart's content like so: </p>
 
-		<pre>smoke.forceload();
-smoke.signal('Welcome to the party');</pre>
-
-		<hr />
-
-
-		<div id="shortthemes">
-			<a href="smoke/themes/default.css" class="selected">light style (default)</a>
-			<a href="smoke/themes/dark.css">dark style</a>
-			<a href="smoke/themes/100s.css">100s style</a>
-			<a href="smoke/themes/tiger.css">tiger style</a>
-		</div>
 
 
 	</div>

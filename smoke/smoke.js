@@ -108,9 +108,6 @@ var smoke = {
 				}, false);
 
 
-
-
-
 		// listeners for button actions
 
 		if (f.type == 'alert'){
@@ -224,7 +221,7 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
   	    smoke.build(e,{type:'alert'},id);
-  	  }, 50); 
+  	  }, 7); 
 	},
 	
 	signal: function(e,f){
@@ -234,14 +231,14 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    smoke.build(e,{type:'signal',timeout:f}, id);
-  	  }, 50); 
+  	  }, 7); 
 	},
 	
 	confirm: function(e,f){
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    smoke.build(e,{type:'confirm',callback:f}, id);
-  	  }, 50); 
+  	  }, 7); 
 		
 	},
 	
@@ -249,7 +246,7 @@ var smoke = {
 	  var id = this.newdialog();
 	  setTimeout(function(){
 		    return smoke.build(e,{type:'prompt',callback:f}, id);
-  	  }, 50); 
+  	  }, 7); 
 	}
 	
 };

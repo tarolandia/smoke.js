@@ -12,14 +12,16 @@ Supported Browsers
 - Safari
 - IE 9+ (usable, no animation)
 - iOS Mobile Safari
+- IE 7/8
 
 
-Currently Broken (but hopefully not for long)
+(old)
+Currently Broken (but hopefully not for long)  
 ---------------------------------------------
 - IE 7/8
 
 (widespread mobile support [android, blackberry, windows] uncertain)
-
+(/old)
 
 
 License
